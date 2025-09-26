@@ -1,24 +1,34 @@
 // Seleciona o elemento na página onde o valor será exibido
 const levelSpan = document.getElementById('tank-level');
 
-// Função para gerar um número aleatório e atualizar a página
+// --- Nossas variáveis de controle ---
+let currentLevel = 0;   // Começa com o tanque em 0
+let direction = 1;      // Começa enchendo (1 = enchendo, -1 = esvaziando)
+
+// Função que atualiza o nível do tanque
 function updateTankLevel() {
-    // Gera um número aleatório de 0 a 100
-    const newLevel = Math.floor(Math.random() * 101);
-    
-    // Atualiza o texto na página com o novo valor
-    levelSpan.textContent = newLevel;
+    // 1. Atualiza o texto na tela com o valor atual
+    levelSpan.textContent = currentLevel;
+
+    // 2. Verifica se atingiu os limites para inverter a direção
+    if (currentLevel >= 100) {
+        direction = -1; // Se chegou em 100, começa a esvaziar
+    } else if (currentLevel <= 0) {
+        direction = 1;  // Se chegou em 0, começa a encher
+    }
+
+    // 3. Calcula o próximo nível somando a direção (ou subtraindo, se direction for -1)
+    currentLevel += direction;
 }
 
 // ==========================================================
-// AQUI VOCÊ CONTROLA O TEMPO
+// AQUI VOCÊ CONTROLA A VELOCIDADE
 // ==========================================================
-// Define com que frequência (em milissegundos) o número deve mudar.
-// 3000 ms = 3 segundos. Mude este valor como preferir.
-const updateInterval = 3000; 
+// Define a velocidade da animação em milissegundos.
+// Valores menores = mais rápido. Valores maiores = mais lento.
+// 100 ms = 0.1 segundos por passo.
+const updateInterval = 100;
 
-// Chama a função pela primeira vez para mostrar um valor inicial
-updateTankLevel();
-
-// Configura para que a função seja chamada repetidamente no intervalo definido
+// Configura para que a função `updateTankLevel` seja chamada repetidamente,
+// criando a animação de encher e esvaziar.
 setInterval(updateTankLevel, updateInterval);
