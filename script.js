@@ -27,7 +27,7 @@ function updateTankLevel() {
 // Define a velocidade da animação em milissegundos.
 // Valores menores = mais rápido. Valores maiores = mais lento.
 // 100 ms = 0.1 segundos por passo.
-const updateInterval = 2000;
+const updateInterval = 5000;
 
 // Configura para que a função `updateTankLevel` seja chamada repetidamente,
 // criando a animação de encher e esvaziar.
